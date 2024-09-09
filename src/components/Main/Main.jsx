@@ -73,13 +73,13 @@ const Main = () => {
           <div className="search-box">
             <input onChange={(e) => setInput(e.target.value)} value={input} type="text" placeholder='Ask here' />
             <div>
-              <img src={assets.gallery_icon} width={30} alt="" />
-              <img src={assets.mic_icon} width={30} alt="" />
+              {/* <img src={assets.gallery_icon} width={30} alt="" /> */}
+              {/* <img src={assets.mic_icon} width={30} alt="" /> */}
               {input ? <img onClick={() => onSent()} src={assets.send_icon} width={30} alt="" /> : null}
             </div>
           </div>
           <p className="bottom-info">
-          Disclaimer: This AI chatbot, created by Omkar, is currently in the development stage and is still being refined. Some buttons and features may not be fully functional at this time.           </p>
+          Disclaimer: This AI chatbot, created by Omkar, is currently in the development stage.       </p>
       </div>
       </div>
     </div>
