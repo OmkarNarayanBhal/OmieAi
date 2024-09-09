@@ -1,72 +1,191 @@
-.sidebar {
+:root {
+    --sidebar-bg: #f0f4f9;
+    --sidebar-hover: #e2e6eb;
+    --text-color: #282828;
+    --primary-color: #4b90ff;
+    --gradient-1: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+  }
+  
+  .sidebar {
     min-height: 100vh;
     display: inline-flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #f0f4f9;
+    background-color: var(--sidebar-bg);
     padding: 25px 15px;
-}
-
-.sidebar img {
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-1);
+    opacity: 0.05;
+    z-index: 0;
+  }
+  
+  .sidebar > * {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .sidebar img {
     width: 20px;
-}
-
-.sidebar .menu {
+    transition: all 0.3s ease;
+    filter: brightness(0) invert(1); /* This line changes the color to white */
+  }
+  
+  .sidebar .menu:hover img,
+  .sidebar .new-chat:hover img,
+  .sidebar .recent-entry:hover img,
+  .sidebar .bottom-item:hover img {
+    filter: brightness(0) invert(1) drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+  }
+  .sidebar .menu {
     display: block;
     margin-left: 10px;
     cursor: pointer;
-}
-
-.sidebar .new-chat {
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar .menu:hover {
+    transform: scale(1.1);
+  }
+  
+  .sidebar .new-chat {
     margin-top: 50px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
     padding: 10px 15px;
-    background-color: #e6eaf1;
+    background-color: var(--sidebar-hover);
     border-radius: 50px;
     font-size: 14px;
-    color: grey;
+    color: var(--text-color);
     cursor: pointer;
-}
-
-.sidebar .recent {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar .new-chat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .sidebar .recent {
     display: flex;
     flex-direction: column;
-    animation: fadeIn 2s;
-}
-
-.sidebar .recent-title{
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .sidebar .recent-title {
     margin-top: 30px;
-margin-bottom: 20px;
-}
-
-.sidebar .recent-entry {
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: var(--text-color);
+    position: relative;
+    padding-left: 10px;
+  }
+  
+  .sidebar .recent-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 70%;
+    background: var(--primary-color);
+    border-radius: 3px;
+  }
+  
+  .sidebar .recent-entry {
     display: flex;
     align-items: start;
     gap: 10px;
     padding: 10px;
     padding-right: 40px;
     border-radius: 50px;
-    color: #282828;
+    color: var(--text-color);
     cursor: pointer;
-}
-
-.sidebar .recent-entry:hover {
-    background-color: #e2e6eb;
-}
-
-.sidebar .bottom {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .sidebar .recent-entry::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.5s ease;
+  }
+  
+  .sidebar .recent-entry:hover {
+    background-color: var(--sidebar-hover);
+    transform: translateX(5px);
+  }
+  
+  .sidebar .recent-entry:hover::before {
+    left: 100%;
+  }
+  
+  .sidebar .bottom {
     display: flex;
     flex-direction: column;
-}
-
-.sidebar .bottom-item {
-    padding-right: 10px;
+    gap: 10px;
+  }
+  
+  .sidebar .bottom-item {
+    padding: 10px;
     cursor: pointer;
-}
-@media (max-width:600px) {
-    .sidebar{
-        display: none;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+  }
+  
+  .sidebar .bottom-item:hover {
+    background-color: var(--sidebar-hover);
+    transform: translateX(5px);
+  }
+  
+  @media (max-width: 600px) {
+    .sidebar {
+      display: none;
     }
-}
+  }
+  
+  /* Dark mode styles */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --sidebar-bg: #1a1a1a;
+      --sidebar-hover: #2c2c2c;
+      --text-color: #e0e0e0;
+    }
+  
+    .sidebar::before {
+      opacity: 0.1;
+    }
+  
+    .sidebar .new-chat,
+    .sidebar .recent-entry,
+    .sidebar .bottom-item {
+      color: var(--text-color);
+    }
+  }
